@@ -13,102 +13,118 @@
 //     </View>
 //   );
 // }
-import React, { useState } from "react";
-import { ScrollView, StyleSheet, Switch, Text, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { Link } from "expo-router";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 
 export default function SettingsScreen() {
-  const [darkMode, setDarkMode] = useState(false);
-  const [pushNotifications, setPushNotifications] = useState(true);
-  const [soundEffects, setSoundEffects] = useState(true);
-  const [twoFactor, setTwoFactor] = useState(false);
-  const [location, setLocation] = useState(true);
-
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.header}>Settings</Text>
-      <Text style={styles.subHeader}>Manage your app preferences</Text>
+      <Text style={styles.title}>Settings</Text>
+      <Text style={styles.sub}>Manage your app preferences</Text>
 
-      {/* Preferences Section */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Preferences</Text>
+      {/* Preferences */}
+      <View style={styles.box}>
+        <Text style={styles.section}>Preferences</Text>
 
-        <View style={styles.row}>
-          <Text style={styles.label}>Dark Mode</Text>
-          <Switch value={darkMode} onValueChange={setDarkMode} />
-        </View>
+        <Pressable style={styles.row}>
+          <View style={styles.rowLeft}>
+            <Ionicons name="moon-outline" size={20} />
+            <Text style={styles.text}>Dark Mode</Text>
+          </View>
+        </Pressable>
 
-        <View style={styles.row}>
-          <Text style={styles.label}>Push Notifications</Text>
-          <Switch value={pushNotifications} onValueChange={setPushNotifications} />
-        </View>
+        <Pressable style={styles.row}>
+          <View style={styles.rowLeft}>
+            <Ionicons name="notifications-outline" size={20} />
+            <Text style={styles.text}>Push Notifications</Text>
+          </View>
+        </Pressable>
 
-        <View style={styles.row}>
-          <Text style={styles.label}>Sound Effects</Text>
-          <Switch value={soundEffects} onValueChange={setSoundEffects} />
-        </View>
+        <Pressable style={styles.row}>
+          <View style={styles.rowLeft}>
+            <Ionicons name="volume-medium-outline" size={20} />
+            <Text style={styles.text}>Sound Effects</Text>
+          </View>
+        </Pressable>
       </View>
 
-      {/* Privacy Section */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Privacy & Security</Text>
+      {/* Privacy */}
+      <View style={styles.box}>
+        <Text style={styles.section}>Privacy & Security</Text>
 
-        <View style={styles.row}>
-          <Text style={styles.label}>Two-Factor Auth</Text>
-          <Switch value={twoFactor} onValueChange={setTwoFactor} />
-        </View>
+        <Pressable style={styles.row}>
+          <View style={styles.rowLeft}>
+            <Ionicons name="shield-outline" size={20} />
+            <Text style={styles.text}>Two-Factor Auth</Text>
+          </View>
+        </Pressable>
 
-        <View style={styles.row}>
-          <Text style={styles.label}>Location Services</Text>
-          <Switch value={location} onValueChange={setLocation} />
-        </View>
+        <Pressable style={styles.row}>
+          <View style={styles.rowLeft}>
+            <Ionicons name="location-outline" size={20} />
+            <Text style={styles.text}>Location Services</Text>
+          </View>
+        </Pressable>
       </View>
 
       <Text style={styles.footer}>App Version 1.0.0</Text>
+
+      {/* Navigation Example using Link */}
+      <Link href="/" style={styles.backBtn}>
+        <Text style={{ color: "white" }}>Go Back Home</Text>
+      </Link>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     padding: 20,
-    backgroundColor: "#F7F7F7",
+    backgroundColor: "#f2f2f2",
   },
-  header: {
+  title: {
     fontSize: 28,
     fontWeight: "bold",
-    marginBottom: 5,
   },
-  subHeader: {
+  sub: {
     color: "gray",
-    marginBottom: 20,
+    marginBottom: 25,
+  },
+  box: {
+    backgroundColor: "#fff",
+    padding: 15,
+    borderRadius: 10,
+    marginBottom: 25,
   },
   section: {
-    backgroundColor: "white",
-    padding: 15,
-    borderRadius: 12,
-    marginBottom: 25,
-    shadowColor: "#000",
-    shadowOpacity: 0.1,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 5,
-  },
-  sectionTitle: {
     fontWeight: "bold",
     marginBottom: 15,
+    fontSize: 16,
   },
   row: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingVertical: 12,
+    paddingVertical: 10,
+    borderBottomWidth: 0.5,
+    borderColor: "#ccc",
   },
-  label: {
+  rowLeft: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+  },
+  text: {
     fontSize: 16,
   },
   footer: {
     textAlign: "center",
+    marginTop: 40,
     color: "gray",
-    marginTop: 20,
-    marginBottom: 40,
+  },
+  backBtn: {
+    marginTop: 30,
+    backgroundColor: "black",
+    padding: 12,
+    borderRadius: 8,
+    textAlign: "center",
   },
 });
